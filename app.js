@@ -214,6 +214,28 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  /* --- Quick Preset Simulation Buttons --- */
+  const preset200Btn = document.getElementById('preset-200-btn');
+  const preset429Btn = document.getElementById('preset-429-btn');
+
+  if (preset200Btn) {
+    preset200Btn.addEventListener('click', () => {
+      currentStatusCode = '200';
+      if (statusSelect) statusSelect.value = '200';
+      updateWorkbench();
+      if (sendReqBtn) sendReqBtn.click();
+    });
+  }
+
+  if (preset429Btn) {
+    preset429Btn.addEventListener('click', () => {
+      currentStatusCode = '429';
+      if (statusSelect) statusSelect.value = '429';
+      updateWorkbench();
+      if (sendReqBtn) sendReqBtn.click();
+    });
+  }
+
   /* --- Send Request Simulation Button --- */
   if (sendReqBtn) {
     sendReqBtn.addEventListener('click', () => {
