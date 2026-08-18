@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vesper API — Next-Gen API Workbench & Edge Mock Engine</title>
+  <meta name="description" content="Turn OpenAPI specs or plain prompts into instant, zero-latency edge mock servers and automated contract tests with Vesper API.">
+
+  <!-- OpenGraph & Twitter Meta Tags -->
+  <meta property="og:title" content="Vesper API — Next-Gen API Workbench & Edge Mock Engine">
+  <meta property="og:description" content="Generate zero-latency synthetic API mocks, TypeScript types, and contract tests in plain code or prompts.">
+  <meta property="og:type" content="website">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Background Ambient Glow & Grid -->
+  <div class="bg-grid"></div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Header Navigation -->
+  <header class="header">
+    <div class="container nav-container">
+      <a href="#" class="brand-logo" id="brand-logo">
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16 2L2 9L16 16L30 9L16 2Z" fill="url(#logo-grad-1)"/>
+          <path d="M2 23L16 30L30 23V9L16 16L2 9V23Z" fill="url(#logo-grad-2)" opacity="0.8"/>
+          <defs>
+            <linearGradient id="logo-grad-1" x1="2" y1="2" x2="30" y2="16" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#8B5CF6"/>
+              <stop offset="1" stop-color="#06B6D4"/>
+            </linearGradient>
+            <linearGradient id="logo-grad-2" x1="2" y1="9" x2="30" y2="30" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#6366F1"/>
+              <stop offset="1" stop-color="#3B82F6"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <span>Vesper<span style="color: var(--accent-violet);">.api</span></span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#workbench">Workbench</a>
+        <a href="#generator">Prompt Engine</a>
+        <a href="#performance">Edge Routing</a>
+        <a href="#features">Features</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="#cta" class="btn btn-sm btn-primary">Start Free</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section class="hero-section">
+      <div class="container">
+        
+        <div class="hero-badge-wrap">
+          <div class="badge">
+            <span class="badge-dot"></span>
+            <span>Vesper v1.0 Public Beta — Zero-Latency Mocking</span>
+          </div>
+        </div>
+
+        <h1 class="hero-title">
+          Mock any API in milliseconds. <br>
+          <span class="gradient-text">Powered by Edge AI.</span>
+        </h1>
+
+        <p class="hero-subtitle">
+          Transform OpenAPI specs, GraphQL schemas, or plain natural language prompts into instant, production-ready edge mock servers. Eliminate backend dependencies and ship frontend features 10x faster.
+        </p>
+
+        <div class="hero-cta-group">
+          <a href="#cta" class="btn btn-primary">
+            <span>Start Mocking Free</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#workbench" class="btn btn-secondary">
+            <span>Try Interactive Studio</span>
+          </a>
+        </div>
+
+        <!-- Terminal Quick Install Pill -->
+        <div class="cli-pill">
+          <span>$</span>
+          <code>npm i -g vesper-cli</code>
+          <button class="copy-btn" id="copy-cli-btn" title="Copy CLI install command">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+          </button>
+        </div>
+
+        <!-- HERO INTERACTIVE WORKBENCH STUDIO CARD -->
+        <div class="workbench-card" id="workbench">
+          <div class="workbench-header">
+            <div class="window-dots">
+              <span class="dot dot-red"></span>
+              <span class="dot dot-yellow"></span>
+              <span class="dot dot-green"></span>
+            </div>
+            <div class="window-title">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+              <span>Vesper Live API Studio — Edge Sandbox</span>
+            </div>
+            <div class="window-controls">
+              <span class="status-badge-live">● Edge Active</span>
+            </div>
+          </div>
+
+          <!-- Controls Bar -->
+          <div class="workbench-bar">
+            <!-- Route Tabs -->
+            <div class="route-tabs">
+              <button class="route-tab active" data-route="chat-completions">
+                <span class="method-pill method-post">POST</span>
+                <span>/v1/chat/completions</span>
+              </button>
+              <button class="route-tab" data-route="analytics-realtime">
+                <span class="method-pill method-get">GET</span>
+                <span>/v1/analytics/realtime</span>
+              </button>
+              <button class="route-tab" data-route="users-state">
+                <span class="method-pill method-put">PUT</span>
+                <span>/v1/users/state</span>
+              </button>
+            </div>
+
+            <!-- Simulation Sliders & Status Select -->
+            <div class="sim-controls">
+              <div class="sim-control-item">
+                <label for="latency-slider">Latency:</label>
+                <input type="range" id="latency-slider" min="5" max="500" value="15">
+                <span id="latency-val" style="font-family: var(--font-mono); color: var(--accent-cyan); font-weight: 600;">15ms</span>
+              </div>
+
+              <div class="sim-control-item">
+                <label for="status-select">Status:</label>
+                <select id="status-select" class="sim-select">
+                  <option value="200">200 OK</option>
+                  <option value="429">429 Rate Limit</option>
+                  <option value="500">500 Server Error</option>
+                </select>
+              </div>
+
+              <button class="btn btn-sm btn-primary" id="send-req-btn">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                <span>Send Request</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Split Panel Body -->
+          <div class="workbench-body">
+            <!-- Request Panel -->
+            <div class="workbench-panel panel-left">
+              <div class="panel-header">
+                <span class="panel-title">Request Payload</span>
+                <button class="copy-btn" id="copy-curl-btn" title="Copy as cURL command">
+                  <span style="font-size: 0.75rem; font-weight: 600; font-family: var(--font-mono);">Copy cURL</span>
+                </button>
+              </div>
+              
+              <div style="font-family: var(--font-mono); font-size: 0.8125rem; margin-bottom: 0.5rem; color: var(--text-secondary);">
+                <span id="req-method" class="method-pill method-post">POST</span>
+                <span id="req-url">https://api.vesper.dev/v1/chat/completions</span>
+              </div>
+
+              <div class="code-container">
+                <pre id="req-body-code"></pre>
+              </div>
+            </div>
+
+            <!-- Response Panel -->
+            <div class="workbench-panel">
+              <div class="panel-header">
+                <span class="panel-title">Live Mock Response</span>
+                <button class="copy-btn" id="copy-json-btn" title="Copy Response JSON">
+                  <span style="font-size: 0.75rem; font-weight: 600; font-family: var(--font-mono);">Copy JSON</span>
+                </button>
+              </div>
+
+              <!-- Status Header Bar -->
+              <div class="response-status-bar">
+                <div>Status: <span id="status-tag" class="status-ok">200 OK</span></div>
+                <div>Edge Latency: <span id="latency-tag" class="latency-tag">15ms</span></div>
+              </div>
+
+              <div class="code-container">
+                <pre id="res-body-code"></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FEATURE 1: PROMPT-TO-MOCK ENGINE -->
+    <section class="section" id="generator">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Prompt-to-Mock Engine</span>
+          <h2 class="section-title">Describe your API. <br><span class="gradient-text">Get instant specs & mock payloads.</span></h2>
+          <p class="section-desc">
+            Type natural language requirements or drop in TypeScript interfaces. Vesper automatically infers validation schemas, realistic mock data, and edge routes.
+          </p>
+        </div>
+
+        <div class="generator-card">
+          <!-- Preset Prompt Chips -->
+          <div class="prompt-tabs">
+            <button class="prompt-chip active" data-preset="stripe">Stripe Checkout Session Spec</button>
+            <button class="prompt-chip" data-preset="oauth">OAuth2 Bearer Token Auth</button>
+            <button class="prompt-chip" data-preset="iot">Realtime IoT Telemetry Node</button>
+          </div>
+
+          <div class="generator-grid">
+            <div>
+              <div class="panel-header">
+                <span class="panel-title">Generated TypeScript Contract</span>
+              </div>
+              <div class="code-container" style="min-height: 220px;">
+                <pre id="gen-spec-code" style="color: #93C5FD;">type CheckoutSession = {
+  id: string;
+  amount_total: number;
+  currency: "usd" | "eur";
+  payment_status: "paid" | "unpaid";
+  customer_email: string;
+};</pre>
+              </div>
+            </div>
+
+            <div>
+              <div class="panel-header">
+                <span class="panel-title">Synthetic Edge Response</span>
+              </div>
+              <div class="code-container" style="min-height: 220px;">
+                <pre id="gen-output-code" style="color: #A7F3D0;">{
+  "id": "cs_test_998124a",
+  "amount_total": 4900,
+  "currency": "usd",
+  "payment_status": "paid",
+  "customer_email": "alex@devteam.io"
+}</pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURE 2: SUB-15ms EDGE ROUTING LATENCY GRAPH -->
+    <section class="section" id="performance" style="background: rgba(15, 23, 42, 0.3);">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Global Edge Architecture</span>
+          <h2 class="section-title">Global speed. <span class="gradient-text">Zero server maintenance.</span></h2>
+          <p class="section-desc">
+            Vesper runs mock endpoints across 300+ Cloudflare & AWS edge nodes worldwide. Test frontend states under realistic network conditions without deploying a single backend container.
+          </p>
+        </div>
+
+        <div class="latency-comparison-card">
+          <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem;">p99 Latency Benchmarks (Global Endpoints)</h3>
+          <p style="font-size: 0.875rem; color: var(--text-secondary);">Measured across 10,000 synthetic mock requests globally.</p>
+
+          <div class="chart-bar-group">
+            <!-- Vesper Bar -->
+            <div class="bar-row">
+              <div class="bar-label-wrap">
+                <span style="color: #C4B5FD; font-weight: 700;">⚡ Vesper Edge Engine (Distributed WASM)</span>
+                <span style="color: var(--accent-cyan); font-family: var(--font-mono);">12ms p99</span>
+              </div>
+              <div class="bar-track">
+                <div class="bar-fill fill-vesper" style="width: 14%;">12ms</div>
+              </div>
+            </div>
+
+            <!-- Traditional Cloud Mock Bar -->
+            <div class="bar-row">
+              <div class="bar-label-wrap">
+                <span style="color: var(--text-secondary);">Traditional Centralized Mock Server (Express/Node container)</span>
+                <span style="color: var(--text-muted); font-family: var(--font-mono);">280ms p99</span>
+              </div>
+              <div class="bar-track">
+                <div class="bar-fill fill-traditional" style="width: 85%;">280ms</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES GRID -->
+    <section class="section" id="features">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Developer Native</span>
+          <h2 class="section-title">Everything you need to <span class="gradient-text">build & validate APIs.</span></h2>
+        </div>
+
+        <div class="features-grid">
+          <!-- Card 1 -->
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h3>Contract Drift Guard</h3>
+            <p>Automatically flags when frontend API calls deviate from defined OpenAPI schemas or backend responses. Catch breaking changes before staging.</p>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+            </div>
+            <h3>Instant Type Generation</h3>
+            <p>Export strictly-typed TypeScript definitions, Zod validation schemas, and Go structs directly from your active mock sessions with one click.</p>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+            </div>
+            <h3>Local Offline Mode</h3>
+            <p>Run <code>vesper dev</code> in your terminal. Full local SQLite-backed persistence keeps your dev workflow instant even on airplanes or spotty Wi-Fi.</p>
+          </div>
+        </div>
+
+        <!-- TRANSPARENT & HONEST COPY BANNER -->
+        <div class="transparency-banner">
+          <div class="transparency-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+          </div>
+          <div>
+            <h3 style="font-size: 1.125rem; margin-bottom: 0.35rem;">Transparent Developer Pledge</h3>
+            <p style="font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.6;">
+              Notice no fake client logos, zero fabricated user counts, and no inflated testimonials? We build developer tools for engineers who value software craft, speed, and real benchmark data over marketing fluff.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FINAL CTA SECTION -->
+    <section class="section cta-section" id="cta">
+      <div class="container">
+        <div class="cta-box">
+          <h2 style="font-size: clamp(2rem, 3.5vw, 2.75rem); margin-bottom: 1rem;">
+            Ready to accelerate your frontend velocity?
+          </h2>
+          <p style="font-size: 1.125rem; color: var(--text-secondary); max-width: 580px; margin: 0 auto 2rem;">
+            Join developers building API-first applications. Start mocking in under 60 seconds with our free community tier.
+          </p>
+
+          <form class="cta-form" onsubmit="event.preventDefault(); alert('Thank you for joining the Vesper AI developer beta!');">
+            <input type="email" class="email-input" placeholder="developer@company.com" required>
+            <button type="submit" class="btn btn-primary">Get Beta Access</button>
+          </form>
+
+          <p style="font-size: 0.8125rem; color: var(--text-muted); margin-top: 1rem;">
+            Free forever tier included • No credit card required • Open Source CLI
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="#" class="brand-logo" style="margin-bottom: 1rem;">
+            <svg viewBox="0 0 32 32" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16 2L2 9L16 16L30 9L16 2Z" fill="#8B5CF6"/>
+              <path d="M2 23L16 30L30 23V9L16 16L2 9V23Z" fill="#3B82F6" opacity="0.8"/>
+            </svg>
+            <span>Vesper.api</span>
+          </a>
+          <p style="font-size: 0.875rem; color: var(--text-muted); max-width: 280px;">
+            The zero-latency API workbench and mock engine for high-velocity engineering teams.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Product</h4>
+          <ul>
+            <li><a href="#workbench">Live Workbench</a></li>
+            <li><a href="#generator">Prompt Engine</a></li>
+            <li><a href="#performance">Edge Benchmarks</a></li>
+            <li><a href="#features">CLI Tooling</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="#">Documentation</a></li>
+            <li><a href="#">OpenAPI Spec Guide</a></li>
+            <li><a href="#">TypeScript Exporter</a></li>
+            <li><a href="#">GitHub Repository</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Engineering</h4>
+          <ul>
+            <li><a href="#">WASM Edge Architecture</a></li>
+            <li><a href="#">Security & Encryption</a></li>
+            <li><a href="#">System Status</a></li>
+            <li><a href="#">Changelog</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 Vesper API Inc. Built with craft for developers worldwide.</div>
+        <div style="display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-mono);">
+          <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--accent-emerald);"></span>
+          <span>All 314 Edge Nodes Operational</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script -->
+  <script src="app.js"></script>
+</body>
+</html>
