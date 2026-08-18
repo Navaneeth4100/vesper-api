@@ -6,6 +6,9 @@
   <title>Vesper API — Next-Gen API Workbench & Edge Mock Engine</title>
   <meta name="description" content="Turn OpenAPI specs or plain prompts into instant, zero-latency edge mock servers and automated contract tests with Vesper API.">
 
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><path d='M16 2L2 9L16 16L30 9L16 2Z' fill='%238B5CF6'/><path d='M2 23L16 30L30 23V9L16 16L2 9V23Z' fill='%233B82F6' opacity='0.8'/></svg>">
+
   <!-- OpenGraph & Twitter Meta Tags -->
   <meta property="og:title" content="Vesper API — Next-Gen API Workbench & Edge Mock Engine">
   <meta property="og:description" content="Generate zero-latency synthetic API mocks, TypeScript types, and contract tests in plain code or prompts.">
@@ -51,6 +54,10 @@
       </nav>
 
       <div class="nav-actions">
+        <button class="btn btn-sm btn-secondary" onclick="document.dispatchEvent(new KeyboardEvent('keydown', {key: 'k', metaKey: true, ctrlKey: true}))" title="Open Command Palette (Ctrl+K)">
+          <span style="font-size: 0.75rem; color: var(--text-muted);">Quick Search</span>
+          <span class="cmd-kbd" style="margin-left: 0.25rem;">⌘K</span>
+        </button>
         <a href="#cta" class="btn btn-sm btn-primary">Start Free</a>
       </div>
     </div>
@@ -440,6 +447,35 @@
       </div>
     </div>
   </footer>
+
+  <!-- Command Palette Modal (Ctrl+K / ⌘K) -->
+  <div class="cmd-modal-overlay" id="cmd-modal">
+    <div class="cmd-modal-content">
+      <div class="cmd-modal-header">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="text" id="cmd-search-input" placeholder="Type a command or search endpoints... (Press ESC to close)" autofocus>
+        <span class="cmd-kbd">ESC</span>
+      </div>
+      <div class="cmd-modal-list">
+        <div class="cmd-item" data-action="route-chat">
+          <span>POST /v1/chat/completions</span>
+          <span class="cmd-tag">Execute Mock Route</span>
+        </div>
+        <div class="cmd-item" data-action="route-analytics">
+          <span>GET /v1/analytics/realtime</span>
+          <span class="cmd-tag">Execute Mock Route</span>
+        </div>
+        <div class="cmd-item" data-action="route-users">
+          <span>PUT /v1/users/state</span>
+          <span class="cmd-tag">Execute Mock Route</span>
+        </div>
+        <div class="cmd-item" data-action="copy-cli">
+          <span>npm i -g vesper-cli</span>
+          <span class="cmd-tag">Copy CLI Install Command</span>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Script -->
   <script src="app.js"></script>

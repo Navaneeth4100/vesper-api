@@ -337,6 +337,67 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  /* --- Command Palette Modal Logic (Ctrl+K / ⌘K) --- */
+  const cmdModal = document.getElementById('cmd-modal');
+  const cmdInput = document.getElementById('cmd-search-input');
+  const cmdItems = document.querySelectorAll('.cmd-item');
+
+  function openCmdModal() {
+    if (cmdModal) {
+      cmdModal.classList.add('open');
+      if (cmdInput) {
+        cmdInput.value = '';
+        setTimeout(() => cmdInput.focus(), 50);
+      }
+    }
+  }
+
+  function closeCmdModal() {
+    if (cmdModal) cmdModal.classList.remove('open');
+  }
+
+  // Keyboard shortcut listener (Ctrl+K / Cmd+K / Esc)
+  document.addEventListener('keydown', (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+      e.preventDefault();
+      if (cmdModal.classList.contains('open')) {
+        closeCmdModal();
+      } else {
+        openCmdModal();
+      }
+    } else if (e.key === 'Escape' && cmdModal && cmdModal.classList.contains('open')) {
+      closeCmdModal();
+    }
+  });
+
+  // Close on clicking backdrop
+  if (cmdModal) {
+    cmdModal.addEventListener('click', (e) => {
+      if (e.target === cmdModal) closeCmdModal();
+    });
+  }
+
+  // Command item execution
+  cmdItems.forEach(item => {
+    item.addEventListener('click', () => {
+      const action = item.getAttribute('data-action');
+      closeCmdModal();
+      if (action === 'route-chat') {
+        const tab = document.querySelector('.route-tab[data-route="chat-completions"]');
+        if (tab) tab.click();
+      } else if (action === 'route-analytics') {
+        const tab = document.querySelector('.route-tab[data-route="analytics-realtime"]');
+        if (tab) tab.click();
+      } else if (action === 'route-users') {
+        const tab = document.querySelector('.route-tab[data-route="users-state"]');
+        if (tab) tab.click();
+      } else if (action === 'copy-cli') {
+        navigator.clipboard.writeText('npm i -g vesper-cli');
+        showToast('CLI command copied: npm i -g vesper-cli');
+      }
+    });
+  });
+
   /* --- Initial Render Call --- */
   updateWorkbench();
 
