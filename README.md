@@ -10,6 +10,10 @@ Vesper AI is an AI-native API Workbench and Mock Engine that converts OpenAPI sp
 - **Obsidian Dark-Mode Aesthetic**: High-contrast glassmorphism (`backdrop-filter: blur(20px)`), neon violet/cyan glow accents, and responsive typography (Inter & JetBrains Mono).
 - **Honest Developer Pledge**: Zero fabricated testimonials, zero fake user counts, zero fake client logos.
 
+## 🌐 Live Demo
+
+- **Production Live Site**: [https://navaneeth4100.github.io/vesper-api/](https://navaneeth4100.github.io/vesper-api/)
+
 ## 🛠️ Quick Start
 
 This project is built with zero framework overhead (HTML5, CSS3, Vanilla JS).
